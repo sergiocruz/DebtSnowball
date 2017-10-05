@@ -1,0 +1,16 @@
+<form [formGroup]="paymentForm" (ngSubmit)="onSaveMonthlyPayment()" autocomplete="off">
+  <label for="monthly-payment">Monthly Payment</label>
+  <input type="text"
+    id="monthly-payment"
+    placeholder="ie. 500.00"
+    formControlName="amount" />
+  <button type="submit" [disabled]="paymentForm.pristine">Save</button>
+</form>
+
+
+<p *ngIf="!DebtService.debtList.length">You don't have any debts, please add some to get started.</p>
+
+<div *ngIf="DebtService.debtList.length">
+  <p>Your total debt is {{DebtService.totalDebtAmount | currency:'USD':true}}</p>
+  <p>You'll be debt free {{debtFreeWhen}}</p>
+</div>

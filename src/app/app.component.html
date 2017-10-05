@@ -1,35 +1,8 @@
-<ul>
-  <li><a href="">Dashboard</a></li>
-  <li><a href="" (click)="toggleDebtForm($event)">Add Debt</a></li>
-</ul>
+<nav>
+  <ul>
+    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+    <li><a routerLink="/add-debt" routerLinkActive="active">Add Debt</a></li>
+  </ul>
+</nav>
 
-<form [formGroup]="paymentForm" (ngSubmit)="onSaveMonthlyPayment()" autocomplete="off">
-  <label for="monthly-payment">Monthly Payment</label>
-  <input type="text"
-    id="monthly-payment"
-    placeholder="ie. 500.00"
-    formControlName="amount" />
-  <button type="submit" [disabled]="paymentForm.pristine">Save</button>
-</form>
-
-
-<p *ngIf="!DebtService.debtList.length">You don't have any debts, please add some to get started.</p>
-
-<div *ngIf="DebtService.debtList.length">
-  <p>Your total debt is {{DebtService.totalDebtAmount | currency:'USD':true}}</p>
-  <p>You'll be debt free {{debtFreeWhen}}</p>
-</div>
-
- <form *ngIf="hasDebtForm" [formGroup]="debtForm" (ngSubmit)="onAddDebt()" novalidate autocomplete="off">
-  <div>
-    <label for="debt-name">Debt name</label>
-    <input type="text" id="debt-name" placeholder="ie. Car" formControlName="name">
-  </div>
-
-  <div>
-    <label for="debt-amount">Debt amount</label>
-    <input type="text" id="debt-amount" formControlName="amount">
-  </div>
-
-  <button type="submit" [disabled]="debtForm.pristine">Save</button>
-</form>
+<router-outlet></router-outlet>

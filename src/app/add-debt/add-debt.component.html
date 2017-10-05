@@ -1,0 +1,13 @@
+<form [formGroup]="debtForm" (ngSubmit)="onAddDebt()" novalidate autocomplete="off">
+  <div>
+    <label for="debt-name">Debt name</label>
+    <input type="text" id="debt-name" placeholder="ie. Car" formControlName="name">
+  </div>
+
+  <div>
+    <label for="debt-amount">Debt amount</label>
+    <input type="text" id="debt-amount" formControlName="amount">
+  </div>
+
+  <button type="submit" [disabled]="debtForm.pristine">Save</button>
+</form>
