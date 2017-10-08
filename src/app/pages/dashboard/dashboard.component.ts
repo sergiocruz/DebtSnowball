@@ -5,8 +5,8 @@ import debounce from 'lodash/debounce'
 import { Observable } from 'rxjs/Rx'
 import { FormBuilder, FormGroup } from '@angular/forms'
 
-import * as fromRoot from '../../store/reducers'
-import { Actions, Debt } from '../../store/debt'
+import { State } from '../../store'
+import { Actions, Debt, State as DebtState } from '../../store/debt'
 
 @Component({
   selector: 'app-dashboard',
@@ -15,27 +15,25 @@ import { Actions, Debt } from '../../store/debt'
 })
 export class DashboardComponent implements OnInit {
   private MONTH_IN_MS: number = 30 * 24 * 60 * 60 * 1000
+  private debtStore: Store<DebtState>
   public paymentForm: FormGroup
-  public totalDebt: number = 0.00
-  public debtFreeWhen: string = ''
   public monthlyPayment$: Observable<number>
   public debtList$: Observable<Debt[]>
-  public totalDebtAmount: number = 0.00
+  public totalDebtAmount = 0.00
+  public debtFreeWhen = ''
 
   public constructor(
     private fb: FormBuilder,
-    private store: Store<fromRoot.State>,
-  ) {}
+    private store: Store<State>,
+  ) {
+    this.debtStore = store.select(state => state.debt)
+  }
 
   public ngOnInit(): void {
-    this.monthlyPayment$ = this.store.select('debt')
-      .select('monthlyPayment')
+    this.monthlyPayment$ = this.debtStore.select(state => state.monthlyPayment)
+    this.debtList$ = this.debtStore.select(state => state.debtList)
 
-    this.debtList$ = this.store.select('debt')
-      .select('debtList')
-
-    this.store.select('debt')
-      .select('totalDebtAmount')
+    this.debtStore.select(state => state.totalDebtAmount)
       .subscribe((totalDebtAmount) => this.totalDebtAmount = totalDebtAmount)
 
     this.monthlyPayment$
@@ -62,9 +60,10 @@ export class DashboardComponent implements OnInit {
       return 'not sure when... input your monthly payment'
     }
 
-    this.store.select('debt')
-      .dispatch(new Actions.SetMonthlyPayment(monthlyPayment))
+    // Set new monthly payment in store
+    this.debtStore.dispatch(new Actions.SetMonthlyPayment(monthlyPayment))
 
+    // How many months till we're debt free
     const monthsTillDebtFree = this.totalDebtAmount / monthlyPayment
 
     if (monthsTillDebtFree <= 1) {
