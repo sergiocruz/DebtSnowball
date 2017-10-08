@@ -4,8 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../../store/reducers';
-import * as DebtActions from '../../store/debt/actions'
-import { Debt } from '../../store/debt/debt.interface'
+import { Actions, Debt } from '../../store/debt'
 
 @Component({
   selector: 'app-add-debt',
@@ -35,7 +34,7 @@ export class AddDebtComponent implements OnInit {
     }
 
     const debt: Debt = { name, amount }
-    this.store.select('debt').dispatch(new DebtActions.AddDebt(debt))
+    this.store.select('debt').dispatch(new Actions.AddDebt(debt))
     this.debtForm.reset()
   }
 

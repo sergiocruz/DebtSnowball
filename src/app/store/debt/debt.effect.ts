@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { Effect, Actions } from '@ngrx/effects'
-import * as DebtActions from './actions'
+import * as DebtActions from './debt.actions'
 
 @Injectable()
 export class DebtEffect {

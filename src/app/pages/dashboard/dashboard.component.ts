@@ -6,8 +6,7 @@ import { Observable } from 'rxjs/Rx'
 import { FormBuilder, FormGroup } from '@angular/forms'
 
 import * as fromRoot from '../../store/reducers'
-import * as DebtActions from '../../store/debt/actions'
-import { Debt } from '../../store/debt/debt.interface'
+import { Actions, Debt } from '../../store/debt'
 
 @Component({
   selector: 'app-dashboard',
@@ -64,7 +63,7 @@ export class DashboardComponent implements OnInit {
     }
 
     this.store.select('debt')
-      .dispatch(new DebtActions.SetMonthlyPayment(monthlyPayment))
+      .dispatch(new Actions.SetMonthlyPayment(monthlyPayment))
 
     const monthsTillDebtFree = this.totalDebtAmount / monthlyPayment
 

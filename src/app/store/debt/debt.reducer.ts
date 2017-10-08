@@ -1,5 +1,5 @@
 import { Debt } from './debt.interface'
-import * as actions from './actions'
+import * as actions from './debt.actions'
 
 export interface State {
   monthlyPayment: number,

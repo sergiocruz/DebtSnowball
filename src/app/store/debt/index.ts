@@ -1,8 +1,10 @@
-import * as actions from './actions'
-import { reducer, State } from './reducer'
+import * as Actions from './debt.actions'
+import { reducer, State } from './debt.reducer'
+import { Debt } from './debt.interface'
 
 export {
-  actions,
+  Actions,
   reducer,
   State,
+  Debt,
 }
