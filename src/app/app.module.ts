@@ -10,9 +10,8 @@ import { AppComponent } from './app.component'
 import { NotFoundComponent } from './pages/not-found/not-found.component'
 import { AddDebtComponent } from './pages/add-debt/add-debt.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
-import { DebtService } from './debt.service'
-// import { reducers } from './reducers'
-import { reducer as debtReducer } from './reducers/debt/reducer'
+import { reducers } from './reducers'
+// import { reducer as debtReducer } from './reducers/debt/reducer'
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -33,12 +32,12 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     StoreDevtoolsModule,
-    StoreModule.forRoot({ debt: debtReducer }),
+    StoreModule.forRoot(reducers),
     !environment.production
       ? StoreDevtoolsModule.instrument()
       : [],
   ],
-  providers: [DebtService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

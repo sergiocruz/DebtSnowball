@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from './reducers';
-import { DebtService } from './debt.service'
 import { Debt } from './debt'
 
 @Component({

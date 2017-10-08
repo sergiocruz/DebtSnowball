@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
+import { distanceInWordsToNow } from 'date-fns'
 import debounce from 'lodash/debounce'
 import * as moment from 'moment'
 import { Observable } from 'rxjs/Rx'
@@ -7,7 +8,6 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 
 import * as fromRoot from '../../reducers'
 import * as DebtActions from '../../reducers/debt/actions'
-import { DebtService } from '../../debt.service'
 import { Debt } from '../../debt'
 
 @Component({
@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit {
   public constructor(
     private fb: FormBuilder,
     private store: Store<fromRoot.State>,
-    public DebtService: DebtService,
   ) {}
 
   public ngOnInit(): void {
@@ -75,7 +74,12 @@ export class DashboardComponent implements OnInit {
     }
 
     const timeInMS = monthsTillDebtFree * this.MONTH_IN_MS
-    return moment().add(timeInMS).fromNow()
+    const now = new Date().getTime()
+    return distanceInWordsToNow(
+      new Date(now + timeInMS),
+      {addSuffix: true}
+    )
+    // return moment().add(timeInMS).fromNow()
   }
 
   public onSaveMonthlyPayment(): void {
