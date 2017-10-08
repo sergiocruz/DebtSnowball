@@ -1,0 +1,80 @@
+.main {
+  border-top: .25rem solid #ff6c2b;
+  background-color: #F5F5F6;
+  min-height: 100vh;
+  display: flex;
+  flex-flow: row;
+  align-items: stretch;
+}
+
+@media only screen and (max-width: 480px) {
+  .main {
+    flex-flow: column;
+  }
+}
+
+/* SIDEBAR */
+
+.main-sidebar {
+  background-color: #ded7d0;
+  flex-basis: 400px;
+  flex-shrink: 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .main-sidebar {
+    flex-flow: column;
+    flex-basis: auto;
+  }
+}
+
+.main-sidebar .wf-logo {
+  display: block;
+  height: 45px;
+  margin: .5rem auto 1rem;
+  max-width: 250px;
+}
+
+.form-monthly-payment {
+  background-color: #9c9791;
+  border-radius: .25rem;
+  color: #ffffff;
+  margin: 1.5rem 0;
+  padding: 1rem;
+}
+
+.form-monthly-payment .fields {
+  display: flex;
+  height: 2.25rem;
+  margin: .5rem 0;
+}
+
+.form-monthly-payment input,
+.form-monthly-payment button {
+  margin: 0;
+}
+
+.form-monthly-payment input {
+  border: 2px solid #5b5d58;
+  border-right: none;
+}
+
+.form-monthly-payment button {
+  background-color: #5b5d58;
+  border: 2px solid #5b5d58;
+  border-left: none;
+  color: #ffffff;
+  flex-basis: 250px;
+  font-size: 14px;
+}
+
+.form-monthly-payment button:disabled {
+  background-color: #8e908a;
+  color: #a0a09d;
+}
+
+/* CONTENT */
+
+.main-content {
+  flex-grow: 1;
+}

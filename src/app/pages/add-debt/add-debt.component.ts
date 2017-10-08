@@ -25,6 +25,7 @@ export class AddDebtComponent implements OnInit {
 
   ngOnInit() {
     this.debtForm = this.fb.group({ name: '', amount: '' })
+    this.debtList$ = this.debtStore.select(store => store.debtList)
   }
 
   public onAddDebt(): void {

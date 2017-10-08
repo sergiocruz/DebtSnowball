@@ -1,17 +1,34 @@
-<nav>
-  <ul>
-    <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-    <li><a routerLink="/add-debt" routerLinkActive="active">Add Debt</a></li>
-  </ul>
-</nav>
+<main class="main">
+  <aside class="main-sidebar">
+    <div class="wrapper">
 
-<router-outlet></router-outlet>
+      <img src="/assets/wf-logo.png" alt="Wallet Friends" class="wf-logo">
 
-<table>
-  <tbody>
-    <tr *ngFor="let debt of debtList$ | async">
-      <td>{{debt.name}}</td>
-      <td>{{debt.amount | currency:'USD':true}}</td>
-    </tr>
-  </tbody>
-</table>
+      <form class="form-monthly-payment" [formGroup]="paymentForm" (ngSubmit)="onSaveMonthlyPayment()" autocomplete="off">
+        <label for="monthly-payment">Monthly Payment</label>
+
+        <div class="fields">
+          <input type="text"
+            id="monthly-payment"
+            placeholder="ie. 500.00"
+            formControlName="amount" />
+          <button type="submit" [disabled]="paymentForm.pristine">Save</button>
+        </div>
+      </form>
+
+      <p *ngIf="!(debtList$ | async).length">You don't have any debt items, please add some to get started.</p>
+
+      <div *ngIf="(debtList$ | async).length">
+        <p>Total debt: {{totalDebtAmount$ | async | currency:'USD':true}}.</p>
+        <p><strong>You'll be debt free {{debtFreeWhen}}.</strong></p>
+      </div>
+    </div>
+  </aside>
+
+  <section class="main-content">
+    <router-outlet></router-outlet>
+  </section>
+
+</main>
+
+

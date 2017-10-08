@@ -1,13 +1,26 @@
-<form [formGroup]="debtForm" (ngSubmit)="onAddDebt()" novalidate autocomplete="off">
-  <div>
-    <label for="debt-name">Debt name</label>
-    <input type="text" id="debt-name" placeholder="ie. Car" formControlName="name">
-  </div>
+<form class="form-add-debt" [formGroup]="debtForm" (ngSubmit)="onAddDebt()" novalidate autocomplete="off">
+  <h2>Add debt</h2>
 
-  <div>
-    <label for="debt-amount">Debt amount</label>
-    <input type="text" id="debt-amount" formControlName="amount">
-  </div>
+  <input type="text" id="debt-name" placeholder="ie. Car" formControlName="name">
+
+  <input type="text" id="debt-amount" placeholder="ie. 500.00" formControlName="amount">
 
   <button type="submit" [disabled]="debtForm.pristine">Save</button>
 </form>
+
+<div class="wrapper">
+
+  <h3>Here are your debts:</h3>
+
+  <p *ngIf="!(debtList$ | async).length">No debts here yet... add one to get started!</p>
+
+  <table class="debt-list" *ngIf="(debtList$ | async).length > 0">
+      <tbody>
+        <tr *ngFor="let debt of debtList$ | async">
+          <td>{{debt.name}}</td>
+          <td>{{debt.amount | currency:'USD':true}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+

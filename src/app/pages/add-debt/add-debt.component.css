@@ -1,0 +1,58 @@
+/* TOP FORM */
+
+.form-add-debt {
+  align-items: center;
+  background-color: #ded7d0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .form-add-debt {
+    flex-flow: column;
+  }
+}
+
+.form-add-debt > * {
+  margin: 0 2rem 0 0;
+}
+
+.form-add-debt input,
+.form-add-debt button {
+  height: 2rem;
+}
+
+.form-add-debt button {
+  border: none;
+  background-color: #5b5d58;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  flex-basis: 150px;
+}
+
+/* TABLE */
+
+.debt-list {
+  border-spacing: 0;
+  border: 2px solid #d7d4cf;
+  width: 100%;
+}
+
+.debt-list tbody tr td {
+  padding: 1rem;
+}
+
+.debt-list tbody tr td:first-child {
+  width: 45%;
+}
+
+.debt-list tbody tr:nth-child(odd) td {
+  background-color: #f1f0ef;
+}
+
+.debt-list tbody tr:nth-child(even) td {
+  background-color: #d8d4d0;
+}
