@@ -8,9 +8,9 @@
 </form>
 
 
-<p *ngIf="!DebtService.debtList.length">You don't have any debts, please add some to get started.</p>
+<p *ngIf="!(debtList$ | async).length">You don't have any debts, please add some to get started.</p>
 
-<div *ngIf="DebtService.debtList.length">
-  <p>Your total debt is {{DebtService.totalDebtAmount | currency:'USD':true}}</p>
+<div *ngIf="(debtList$ | async).length">
+  <p>Your total debt is {{totalDebtAmount | currency:'USD':true}}</p>
   <p>You'll be debt free {{debtFreeWhen}}</p>
 </div>

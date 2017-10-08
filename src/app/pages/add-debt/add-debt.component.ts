@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms'
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
-import { DebtService } from '../debt.service'
-import { Debt } from '../debt'
+import * as fromRoot from '../../reducers';
+import * as DebtActions from '../../reducers/debt/actions'
+import { Debt } from '../../debt'
 
 @Component({
   selector: 'app-add-debt',
@@ -11,10 +14,11 @@ import { Debt } from '../debt'
 })
 export class AddDebtComponent implements OnInit {
   public debtForm: FormGroup
+  public debtList$: Observable<Debt[]>
 
   constructor(
     private fb: FormBuilder,
-    public DebtService: DebtService,
+    private store: Store<fromRoot.State>,
   ) { }
 
   ngOnInit() {
@@ -31,7 +35,7 @@ export class AddDebtComponent implements OnInit {
     }
 
     const debt: Debt = { name, amount }
-    this.DebtService.addDebt(debt)
+    this.store.select('debt').dispatch(new DebtActions.AddDebt(debt))
     this.debtForm.reset()
   }
 
