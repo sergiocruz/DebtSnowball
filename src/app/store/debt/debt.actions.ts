@@ -3,6 +3,7 @@ import { Debt } from './debt.interface'
 
 export const SET_MONTHLY_PAYMENT = '[Debt] Set Monthly Payment'
 export const ADD_DEBT = '[Debt] Add Debt'
+export const SET_TOTAL_DEBT_AMOUNT = '[Debt] Sum Debt'
 
 export class SetMonthlyPayment implements Action {
   readonly type = SET_MONTHLY_PAYMENT
@@ -15,4 +16,9 @@ export class AddDebt implements Action {
   constructor(public payload: Debt) {}
 }
 
-export type Action = SetMonthlyPayment | AddDebt
+export class SetDebtAmount implements Action {
+  readonly type = SET_TOTAL_DEBT_AMOUNT
+  constructor(public payload: number) {}
+}
+
+export type Action = SetMonthlyPayment | AddDebt | SetDebtAmount

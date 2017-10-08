@@ -14,7 +14,7 @@ const initialState: State = {
 }
 
 export function reducer(state: State = initialState, action: actions.Action): State {
-  switch(action.type) {
+  switch (action.type) {
     case actions.SET_MONTHLY_PAYMENT:
       return {
         ...state,
@@ -22,13 +22,15 @@ export function reducer(state: State = initialState, action: actions.Action): St
       }
 
     case actions.ADD_DEBT:
-      const debtList = state.debtList.concat([ action.payload ])
       return {
         ...state,
-        debtList,
-        totalDebtAmount: debtList
-          .map(debt => debt.amount)
-          .reduce((a, b) => a + b, 0)
+        debtList: state.debtList.concat([ action.payload ]),
+      }
+
+    case actions.SET_TOTAL_DEBT_AMOUNT:
+      return {
+        ...state,
+        totalDebtAmount: action.payload,
       }
 
     default:
