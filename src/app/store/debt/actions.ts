@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Debt } from '../../debt'
+import { Debt } from './debt.interface'
 
 export const SET_MONTHLY_PAYMENT = '[Debt] Set Monthly Payment'
 export const ADD_DEBT = '[Debt] Add Debt'

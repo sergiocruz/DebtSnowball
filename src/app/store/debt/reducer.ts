@@ -1,4 +1,4 @@
-import { Debt } from '../../debt'
+import { Debt } from './debt.interface'
 import * as actions from './actions'
 
 export interface State {

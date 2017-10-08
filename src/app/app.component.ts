@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import * as fromRoot from './reducers';
-import { Debt } from './debt'
+import * as fromRoot from './store/reducers';
+import { Debt } from './store/debt/debt.interface'
 
 @Component({
   selector: 'app-root',

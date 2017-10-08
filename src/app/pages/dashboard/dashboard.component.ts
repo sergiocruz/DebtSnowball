@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { distanceInWordsToNow } from 'date-fns'
 import debounce from 'lodash/debounce'
-import * as moment from 'moment'
 import { Observable } from 'rxjs/Rx'
 import { FormBuilder, FormGroup } from '@angular/forms'
 
-import * as fromRoot from '../../reducers'
-import * as DebtActions from '../../reducers/debt/actions'
-import { Debt } from '../../debt'
+import * as fromRoot from '../../store/reducers'
+import * as DebtActions from '../../store/debt/actions'
+import { Debt } from '../../store/debt/debt.interface'
 
 @Component({
   selector: 'app-dashboard',
@@ -79,7 +78,6 @@ export class DashboardComponent implements OnInit {
       new Date(now + timeInMS),
       {addSuffix: true}
     )
-    // return moment().add(timeInMS).fromNow()
   }
 
   public onSaveMonthlyPayment(): void {

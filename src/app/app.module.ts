@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
 import { RouterModule, Routes } from '@angular/router'
 import { StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { environment } from '../environments/environment'
@@ -10,15 +11,8 @@ import { AppComponent } from './app.component'
 import { NotFoundComponent } from './pages/not-found/not-found.component'
 import { AddDebtComponent } from './pages/add-debt/add-debt.component'
 import { DashboardComponent } from './pages/dashboard/dashboard.component'
-import { reducers } from './reducers'
-// import { reducer as debtReducer } from './reducers/debt/reducer'
-
-const appRoutes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'add-debt', component: AddDebtComponent },
-  { path: '**', component: NotFoundComponent }
-]
+import { Effects, Reducers } from './store'
+import { appRoutes } from './app.routes'
 
 @NgModule({
   declarations: [
@@ -32,7 +26,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     StoreDevtoolsModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(Reducers),
+    EffectsModule.forRoot(Effects),
     !environment.production
       ? StoreDevtoolsModule.instrument()
       : [],
